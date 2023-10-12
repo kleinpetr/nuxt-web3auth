@@ -6,7 +6,7 @@ const web3auth = ref<Web3Auth>();
 //Initialize within your constructor
 onMounted(async() => {
   web3auth.value = new Web3Auth({
-      clientId: "BM1Y5tLpww5mz5LEZOJg-CwBGvHYDgX5-vAQiOAXyKG_qxrV8SD2HJg0fcugvMmQvbrCiNNIcEpYl4UycoJXrdc",
+      clientId: "BCU-22PpkfAnTdMuhrfwcr6qJAG3zin2NsxnEuVaP1lnY2Eu0zzhA-bqf8jQzxh5uyk--JT4krWfy4szjFWnpIs",
       web3AuthNetwork: 'testnet',
       chainConfig: {
         chainNamespace: "eip155",
