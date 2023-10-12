@@ -29,6 +29,10 @@ export default defineNuxtModule({
         'global.msCrypto': 'globalThis.msCrypto',
       })
 
+      config.optimizeDeps = defu(config.optimizeDeps, {
+        include: ['base64url']
+      })
+
       config.plugins ||= []
       config.plugins.push({
         name: 'inject-buffer-import',
@@ -36,7 +40,7 @@ export default defineNuxtModule({
         transform(code, id) {
           if (id.includes('unenv/runtime/node/buffer')) { return }
 
-          if (code.includes('Buffer.from(') && !code.includes('unenv/runtime/node/buffer/index') && !code.includes('import { Buffer }') && !code.includes("require('buffer')")) {
+          if ((code.includes('Buffer.isBuffer') || code.includes('Buffer.from(')) && !code.includes('unenv/runtime/node/buffer/index') && !code.includes('import { Buffer }') && !code.includes("require('buffer')")) {
             if (!nuxt.options.dev && (code.includes('require(') || code.includes('exports.'))) {
               return 'const { Buffer } = require("unenv/runtime/node/buffer/index");' + code
             }
